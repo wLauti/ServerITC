@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html lang="es-AR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ServerITC</title>
+
+    <style>
+        body {
+            font-family: "Montserrat", serif;
+            font-optical-sizing: auto;
+            background-color: rgb(44, 44, 44);
+            text-shadow: 0px 0px 5px rgb(0, 0, 0);
+            color: white;
+            margin: 15%;
+        }
+        
+        code {
+            color: black;
+            text-shadow: 0px 0px 0px rgb(0, 0, 0);
+            font-family: "Sono", serif;
+            background-color: rgb(73, 73, 73);
+            padding: 0.09em;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Sono:wght@200..800&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <h1>Requisitos</h1>
+
+    <h2>Windows (Testeado en Windows 11 24H2)</h2>
+    <ul>
+        <li>+8 gigabytes de RAM.</li>
+        <li>Java 11 instalado. (Archivo y instrucciones para descargarlo disponibles en la carpeta Programas)</li>
+        <li>Token de Ngrok cargado. (En caso de no estar cargado, ir a Instrucciones de inicio para ver los pasos a seguir)</li>
+        <li>Editor de texto compatible con los siguientes tipos de archivo: .json, .xml, .propierties. (El bloc de notas es compatible)</li>
+    </ul>
+
+    <h2>Linux (Testeado en Ubuntu Desktop 24.04.1)</h2>
+    <ul>
+        <li>+8 gigabytes de RAM.</li>
+        <li>+16 gigabytes disponibles en el disco duro.</li>
+        <li>Java 11 instalado. (Archivo y instrucciones para descargarlo disponibles en la carpeta Programas)</li>
+        <li>Ngrok para la terminal descargado. (Archivo y instrucciones para descargarlo disponibles en la carpeta Programas)</li>
+        <li>Token de Ngrok cargado. (En caso de no estar cargado, ir a Instrucciones de inicio para ver los pasos a seguir)</li>
+        <li>Editor de texto compatible con los siguientes tipos de archivo: .json, .xml, .propierties. (Editor de texto y Notepad++ son compatibles)</li>
+    </ul>
+
+    <h1>Instrucciones de inicio</h1>
+
+    <h2>Windows</h2>
+    <ol>
+        <li>
+            Suponiendo que el USB ya está conectado al ordenador, el siguiente paso es verificar los requisitos fundamentales: Java 11 y Ngrok.
+
+            <h3>Java 11</h3>
+            <p>Para comprobar Java en cualquier versión de Windows debemos abrir la terminal y ejecutar el siguiente comando:</p>
+            <pre><code>java -version</code></pre>
+
+            <p>En caso de que no tengas Java te debe aparecer algo así:</p>
+            <pre><code>'java' no se reconoce como un comando interno o externo, programa o archivo por lotes ejecutable.</code></pre>
+
+            <p>En caso de que tengas alguna versión de Java te debe aparecer esto:</p>
+            <pre><code>java version "17.0.2" 2022-01-18 LTS
+Java(TM) SE Runtime Environment (build 17.0.2+8)
+Java HotSpot(TM) 64-Bit Server VM (build 17.0.2+8, mixed mode)</code></pre>
+
+            <p>Para verificar que tengas la versión de Java, debes verificar el inicio del comando, donde dice <code>java version "17.0.2"</code>, el número 17 debería ser 11 y los otros dos números pueden ser cualquiera.</p>
+
+            <h4>En caso de no tener Java 11 o tener otra versión</h4>
+            <p>Ir a la carpeta Programas en el USB, ir a Windows y ejecutar el archivo por lotes de Windows Java_11.msi. (Elegir 64 o 32 bits según tu equipo).</p>
+            <p>Para ver de cuántos bits es tu equipo, haz clic derecho en el botón Inicio y selecciona “Sistema”. En la sección “Especificaciones del dispositivo”, verás el “Tipo de sistema”. Si dice “PC basado en x64”, es de 64 bits. Si dice “PC basado
+                en x86”, es de 32 bits.</p>
+            <p>Al terminar la instalación, ya debería estar instalado Java 11, superponiendo a la versión anterior en caso de tener otra versión de Java o no tener Java.</p>
+
+            <h3>Ngrok</h3>
+            <p>En Windows, Ngrok es muy fácil de usar, no necesitas instalar nada, en la carpeta ServerITC hay 2 archivos; Ngrok.exe y Ngrok_32bits.exe. Debes elegir según tu equipo:</p>
+            <ul>
+                <li>Si tu equipo es de 64 bits, selecciona el archivo Ngrok.exe.</li>
+                <li>Si tu equipo es de 32 bits, renombra el archivo Ngrok.exe a Ngrok_64bits.exe y renombra el archivo Ngrok_32bits.exe a Ngrok.exe.</li>
+            </ul>
+            <p>Ya teniendo abierto Ngrok.exe, si todavía no tienes ningún token de Ngrok cargado en tu computador, escribe:</p>
+            <pre><code>ngrok config add-authtoken 2qwt0gapRolUawhPzQ8yM9TJCeW_3PMAAF7dSzeDNdMViJxCP</code></pre>
+            <p>Si ya tenemos el token cargado podemos cerrar Ngrok.exe.</p>
+        </li>
+
+        <li>
+            Configurar la RAM disponible para el servidor. Para esto, abre el archivo <code>startin_windows.bat</code> con un editor de texto y busca el siguiente código:
+            <pre><code>TITLE ServerITC
+:loop
+ java -Xmx4G -Xms4G -jar forge-1.16.5-36.2.34.jar nogui
+goto :loop
+pause</code></pre>
+            <p>Para configurar la RAM, modifica la línea 3, cambiando <code>4G</code> por la cantidad deseada de gigabytes.</p>
+            <p>Ejemplo:</p>
+            <pre><code>TITLE ServerITC
+:loop
+ java -Xmx999G -Xms999G -jar forge-1.16.5-36.2.34.jar nogui
+goto :loop
+pause</code></pre>
+        </li>
+
+        <li>
+            Inicia el servidor ejecutando con doble clic el archivo <code>startin_windows.bat</code> y espera a que se inicie. Para comprobar, presiona dos veces la tecla <code>Enter</code>. Si recibes una respuesta como:
+            <pre><code>Unknown or incomplete command, see below for error at position 1: <--[HERE]</code></pre>
+            <p>El servidor ya está iniciado. Puedes acceder al servidor usando tu IP local:</p>
+            <ul>
+                <li>Abre una terminal en Windows y escribe <code>ipconfig</code>. Busca la dirección IPv4 y cópiala como dirección IP del servidor.</li>
+            </ul>
+            <p>Para jugadores externos, usa Ngrok:</p>
+            <pre><code>ngrok tcp 25565</code></pre>
+            <p>En la tabla que aparece, copia la URL que comienza con <code>tcp://</code> (sin <code>-> localhost:25565</code>) y compártela con los jugadores.</p>
+        </li>
+    </ol>
+
+    <h2>Linux</h2>
+    <ol>
+        <li>
+            Suponiendo que el USB ya está conectado al ordenador, el siguiente paso es verificar los requisitos fundamentales: Java 11 y Ngrok.
+
+            <h3>Java 11</h3>
+            <p>Para comprobar Java en cualquier versión de Linux debemos abrir la terminal y ejecutar el siguiente comando:</p>
+            <pre><code>java -version</code></pre>
+
+            <p>En caso de que no tengas Java te debe aparecer algo así:</p>
+            <pre><code>Command 'java' not found</code></pre>
+
+            <p>En caso de que tengas alguna versión de Java te debe aparecer esto:</p>
+            <pre><code>openjdk version "17.0.4" 2023-01-17
+OpenJDK Runtime Environment (build 17.0.4+8)
+OpenJDK 64-Bit Server VM (build 17.0.4+8, mixed mode)</code></pre>
+
+            <p>Para verificar que tengas la versión de Java, debes verificar el inicio del comando, donde dice <code>openjdk version "17.0.4"</code>, el número 17 debería ser 11 y los otros dos números pueden ser cualquiera.</p>
+
+            <h4>En caso de tener otra versión</h4>
+            <p>Hay que eliminar todas las versiones de Java descargadas, de otra forma las otras versiones tendrán mas prioridad. Para esto ejecutaremos:</p>
+            <pre><code>sudo apt-get remove --purge openjdk-*</code></pre>
+            <pre><code>sudo apt-get autoremove</code></pre>
+            <pre><code>sudo apt-get purge openjdk-*</code></pre>
+            <p>Ahora para terminar de asegurarnos vamos a ver todas las versiones de Java descargadas.</p>
+            <pre><code>sudo update-alternatives --config java</code></pre>
+            <p>Si no aparece ninguna ruta entonces puedes saltar a la comprobación de Java.</p>
+            <p>Va a aparecer una tabla con todas las rutas de instalacion de Java. Presiona <code>Ctrl + C</code> para salir del editor de prioridades y todas esas rutas se quedaran en el historial de la terminal. Ahora para cada ruta vas a ejecutar este
+                comando y donde dice /ruta/java reemplaza con la ruta correspondiente. Repite para cada ruta que haya aparecido en la tabla.</p>
+            <pre><code>sudo rm -rf /ruta/java</code></pre>
+
+            <h4>En caso de no tener Java 11</h4>
+            <p>Ir a la carpeta Programas en el USB, ir a Linux, abrir la terminal en esa ubicación y ejecutar el siguiente comando.</p>
+            <pre><code>sudo dpkg -i Linux.deb</code></pre>
+            <p>Al terminar, ya debería estar instalado Java 11.</p>
+
+            <h3>Ngrok</h3>
+            <p>En Linux, para instalar Ngrok, debes ejecutar el siguiente comando en la terminal:</p>
+            <pre><code>curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
+    | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
+    && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" \
+    | sudo tee /etc/apt/sources.list.d/ngrok.list \
+    && sudo apt update \
+    && sudo apt install ngrok</code></pre>
+            <p>Ya teniendo instalado Ngrok, si todavía no tienes ningún token de Ngrok cargado en tu computador, escribe:</p>
+            <pre><code>ngrok config add-authtoken 2qwt0gapRolUawhPzQ8yM9TJCeW_3PMAAF7dSzeDNdMViJxCP</code></pre>
+            <p>Si ya tenemos el token cargado podemos cerrar la terminal.</p>
+        </li>
+
+        <li>
+            Configurar la RAM disponible para el servidor. Para esto, abre el archivo <code>startin_linux.sh</code> con un editor de texto y busca el siguiente código:
+            <pre><code>echo "Iniciando el ServerITC..."
+while true 
+do
+    java -Xmx4G -Xms4G -jar forge-1.16.5-36.2.34.jar nogui
+    echo "El servidor se detuvo. Reiniciando..."
+done</code></pre>
+            <p>Para configurar la RAM, modifica la línea 4, cambiando <code>4G</code> por la cantidad deseada de gigabytes.</p>
+            <p>Ejemplo:</p>
+            <pre><code>echo "Iniciando el ServerITC..."
+while true 
+do
+    java -Xmx999G -Xms999G -jar forge-1.16.5-36.2.34.jar nogui
+    echo "El servidor se detuvo. Reiniciando..."
+done</code></pre>
+        </li>
+
+        <li>
+            Abre una terminal en la carpeta ServerITC y ejecuta el siguiente comando:
+            <pre><code>bash startin_linux.sh</code></pre>
+            <p>Espera a que se inicie el servidor, para verificar si ya termino de iniciar, presiona <code>Enter</code> dos veces y si la terminal no da ninguna respuesta, el server sigue iniciando, en cambio si muestra el siguiente texto, significa que
+                ya inicio el server.</p>
+            <pre><code>Unknown or incomplete command, see below for error at position 1: <--[HERE]</code></pre>
+            <p>El servidor ya está iniciado. Puedes acceder al servidor usando tu IP local:</p>
+            <ul>
+                <li>Abre una terminal y escribe <code>hostname -I</code>. cópia el texto y pegalo como dirección IP del servidor.
+                    <p>El problema es que esta IP solo la podes usar vos.</p>
+                </li>
+            </ul>
+            <p>Para jugadores externos, usa Ngrok:</p>
+            <p>Abre una terminal en la carpeta ServerITC y ejecuta el siguiente comando:</p>
+            <pre><code>ngrok tcp 25565</code></pre>
+            <p>En la tabla que aparece, copia la URL que comienza con <code>tcp://</code> (sin <code>-> localhost:25565</code>) y compártela con los jugadores.</p>
+        </li>
+    </ol>
+
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
