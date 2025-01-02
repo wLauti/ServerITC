@@ -26,6 +26,13 @@
             background-color: rgb(73, 73, 73);
             padding: 0.09em;
         }
+        
+        img {
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.438);
+            background-color: white;
+        }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,18 +47,29 @@
     <h2>Windows (Testeado en Windows 11 24H2)</h2>
     <ul>
         <li>+8 gigabytes de RAM.</li>
-        <li>Java 11 instalado. (Archivo y instrucciones para descargarlo disponibles en la carpeta Programas)</li>
-        <li>Token de Ngrok cargado. (En caso de no estar cargado, ir a Instrucciones de inicio para ver los pasos a seguir)</li>
+        <p>Para poder ver la RAM que tienes disponible en tu dispositivo, presiona <code>Win + X</code>, va a aparecer una lista con opciones, presiona la opcion "Sistema". Deberia abrirse una ventana como esta:</p>
+        <img src="https://i.imgur.com/QIX4GQr.png" alt="">
+        <p>Debes fijarte en la parte donde dice "RAM Instalada", como vemos en la imagen, mi equipo tiene 32 gigabytes de RAM, por lo tanto mi equipo cumple este requisito.</p>
+        <li>Java 11 instalado.</li>
+        <p>En caso de que no tengas instalado Java 11, tengas otra version o no estes seguro de que lo tienes, dirigete a el primer paso en las instrucciones de inicio de Windows.</p>
+        <li>Token de Ngrok cargado.</li>
+        <p>Para cargar el token ve a el primer paso en las instrucciones de inicio de Windows.</p>
         <li>Editor de texto compatible con los siguientes tipos de archivo: .json, .xml, .propierties. (El bloc de notas es compatible)</li>
     </ul>
 
     <h2>Linux (Testeado en Ubuntu Desktop 24.04.1)</h2>
     <ul>
         <li>+8 gigabytes de RAM.</li>
-        <li>+16 gigabytes disponibles en el disco duro.</li>
-        <li>Java 11 instalado. (Archivo y instrucciones para descargarlo disponibles en la carpeta Programas)</li>
-        <li>Ngrok para la terminal descargado. (Archivo y instrucciones para descargarlo disponibles en la carpeta Programas)</li>
-        <li>Token de Ngrok cargado. (En caso de no estar cargado, ir a Instrucciones de inicio para ver los pasos a seguir)</li>
+        <p>Para verificar cuanta RAM tienes en tu dispositivo, abre el Monitor del Sistema, deberia aparecerte algo asi:</p>
+        <img src="https://i.imgur.com/b5Z8TDd.png" alt="">
+        <p>Hay que fijarnos abajo de la segunda grafica, donde dice Memoria, podras ver que dice <code>A</code> GB (<code>B</code>%) de <code>C</code> GB. A es la cantidad de RAM usada en gigabytes, B es el porcentaje de RAM usada y C es la RAM que posee
+            tu equipo, mi equipo tiene 12.2 gigabytes, por lo que cumple el requisito.</p>
+        <li>Java 11 instalado.</li>
+        <p>En caso de no estar instalado, estar instalado en otra version o no estar seguro, ve al primer paso de Instrucciones de Inicio para Linux.</p>
+        <li>Ngrok para la terminal descargado.</li>
+        <p>En caso de no estar instalado, estar instalado en otra version o no estar seguro, ve al primer paso de Instrucciones de Inicio para Linux.</p>
+        <li>Token de Ngrok cargado.</li>
+        <p>En caso de no estar cargado, revisa el primer paso de Instrucciones de Inicio en Linux.</p>
         <li>Editor de texto compatible con los siguientes tipos de archivo: .json, .xml, .propierties. (Editor de texto y Notepad++ son compatibles)</li>
     </ul>
 
@@ -77,8 +95,8 @@ Java HotSpot(TM) 64-Bit Server VM (build 17.0.2+8, mixed mode)</code></pre>
             <p>Para verificar que tengas la versión de Java, debes verificar el inicio del comando, donde dice <code>java version "17.0.2"</code>, el número 17 debería ser 11 y los otros dos números pueden ser cualquiera.</p>
 
             <h4>En caso de no tener Java 11 o tener otra versión</h4>
-            <p>Ir a la carpeta Programas en el USB, ir a Windows y ejecutar el archivo por lotes de Windows Java_11.msi. (Elegir 64 o 32 bits según tu equipo).</p>
-            <p>Para ver de cuántos bits es tu equipo, haz clic derecho en el botón Inicio y selecciona “Sistema”. En la sección “Especificaciones del dispositivo”, verás el “Tipo de sistema”. Si dice “PC basado en x64”, es de 64 bits. Si dice “PC basado
+            <p>Ir a la carpeta Programas en el USB, ir a Windows y ejecutar el archivo por lotes: Java.msi. (Elegir 64 o 32 bits según tu equipo).</p>
+            <p>Para ver de cuántos bits es tu equipo, haz clic derecho en el botón Windows y selecciona “Sistema”. En la sección “Especificaciones del dispositivo”, verás el “Tipo de sistema”. Si dice “PC basado en x64”, es de 64 bits. Si dice “PC basado
                 en x86”, es de 32 bits.</p>
             <p>Al terminar la instalación, ya debería estar instalado Java 11, superponiendo a la versión anterior en caso de tener otra versión de Java o no tener Java.</p>
 
@@ -94,13 +112,13 @@ Java HotSpot(TM) 64-Bit Server VM (build 17.0.2+8, mixed mode)</code></pre>
         </li>
 
         <li>
-            Configurar la RAM disponible para el servidor. Para esto, abre el archivo <code>startin_windows.bat</code> con un editor de texto y busca el siguiente código:
+            Configurar la RAM disponible para el servidor. Para esto, abre el archivo <code>startin_windows.bat</code> con un editor de texto y deberias ver el siguiente código:
             <pre><code>TITLE ServerITC
 :loop
  java -Xmx4G -Xms4G -jar forge-1.16.5-36.2.34.jar nogui
 goto :loop
 pause</code></pre>
-            <p>Para configurar la RAM, modifica la línea 3, cambiando <code>4G</code> por la cantidad deseada de gigabytes.</p>
+            <p>Para configurar la RAM, modifica la línea 3, cambiando <code>4G</code> por la cantidad deseada de gigabytes en ambos valores.</p>
             <p>Ejemplo:</p>
             <pre><code>TITLE ServerITC
 :loop
@@ -110,15 +128,24 @@ pause</code></pre>
         </li>
 
         <li>
-            Inicia el servidor ejecutando con doble clic el archivo <code>startin_windows.bat</code> y espera a que se inicie. Para comprobar, presiona dos veces la tecla <code>Enter</code>. Si recibes una respuesta como:
+            Inicia el servidor ejecutando con doble clic el archivo <code>startin_windows.bat</code> y espera a que se inicie. Para comprobar si ya inicio, presiona dos veces la tecla <code>Enter</code>. Si recibes una respuesta como:
             <pre><code>Unknown or incomplete command, see below for error at position 1: <--[HERE]</code></pre>
-            <p>El servidor ya está iniciado. Puedes acceder al servidor usando tu IP local:</p>
-            <ul>
-                <li>Abre una terminal en Windows y escribe <code>ipconfig</code>. Busca la dirección IPv4 y cópiala como dirección IP del servidor.</li>
-            </ul>
-            <p>Para jugadores externos, usa Ngrok:</p>
-            <pre><code>ngrok tcp 25565</code></pre>
-            <p>En la tabla que aparece, copia la URL que comienza con <code>tcp://</code> (sin <code>-> localhost:25565</code>) y compártela con los jugadores.</p>
+            <p>El servidor ya está iniciado.
+                <p>Para acceder al servidor, usa Ngrok:</p>
+                <p>Ejecuta ngrok.exe y escribe el siguiente comando:</p>
+                <pre><code>ngrok tcp 25565</code></pre>
+                <p>Deberia aparecerte una tabla asi:</p>
+                <img src="https://i.imgur.com/XDyxp1M.png" alt="">
+                <p>En la tabla podemos ver 2 columnas, en la columna de la izquierda busca "Forwarding", en esa misma fila, columna derecha, hay una url: <code>tcp://0.tcp.sa.ngrok.io:18781</code> la IP del servidor que debes usar y compartir es <code>0.tcp.sa.ngrok.io:18781</code>                    excluyendo el <code>tcp://</code>. Sin embargo el numero que aparece ahi; <code>18781</code>, te va a aparecer diferente a vos, esto es porque por cada vez que se abra el server con Ngrok, ese numero cambia, por eso debes compartir
+                    la IP cada vez que abras el server. Por ejemplo si yo abro de nuevo Ngrok, me aparece el siguiente numero:</p>
+                <img src="https://i.imgur.com/ip1bXNV.png" alt="">
+                <p>Podemos ver que esta vez me toco el numero 17634, por lo que la IP que debemos usar para el servidor hasta que lo cerremos y lo abramos de nuevo.</p>
+                <p>Ahora que ya tenemos abierto Ngrok, ya podemos unirnos al servidor. Abrimos Minecraft con Forge 1.16.5 con los mods instalados y vamos a la seccion de Multijugador. Apretamos <code>Agregar servidor</code> y le ponemos un nombre al servidor.
+                    Donde dice IP del servidor ponemos la IP que conseguimos en Ngrok.</p>
+                <img src="https://i.imgur.com/u5RrI76.png" alt="" height="500">
+                <p>Apretamos hecho y ya podemos entrar al servidor.</p>
+                <img src="https://i.imgur.com/PfWNgnn.png" alt="">
+
         </li>
     </ol>
 
@@ -148,10 +175,13 @@ OpenJDK 64-Bit Server VM (build 17.0.4+8, mixed mode)</code></pre>
             <pre><code>sudo apt-get purge openjdk-*</code></pre>
             <p>Ahora para terminar de asegurarnos vamos a ver todas las versiones de Java descargadas.</p>
             <pre><code>sudo update-alternatives --config java</code></pre>
-            <p>Si no aparece ninguna ruta entonces puedes saltar a la comprobación de Java.</p>
-            <p>Va a aparecer una tabla con todas las rutas de instalacion de Java. Presiona <code>Ctrl + C</code> para salir del editor de prioridades y todas esas rutas se quedaran en el historial de la terminal. Ahora para cada ruta vas a ejecutar este
-                comando y donde dice /ruta/java reemplaza con la ruta correspondiente. Repite para cada ruta que haya aparecido en la tabla.</p>
+            <img src="https://i.imgur.com/9vpiWIy.png" alt="">
+            <p>Te va a aparecer una tabla como esta, presiona <code>Ctrl + C</code> para salir del editor de prioridades (la tabla) y todas esas rutas se quedaran en el historial de la terminal. Ahora para cada ruta vas a ejecutar este comando y donde dice
+                /ruta/java reemplaza con la ruta correspondiente. Repite para cada ruta que haya aparecido en la tabla.</p>
             <pre><code>sudo rm -rf /ruta/java</code></pre>
+            <p>Ejemplo con las rutas que aparecen en mi tabla (en verdad yo no deberia porque la version que aparece ahi es Java 11)</p>
+            <pre><code>sudo rm -rf /usr/lib/jvm/bellsoft-java11-full-amd64/bin/java</code></pre>
+
 
             <h4>En caso de no tener Java 11</h4>
             <p>Ir a la carpeta Programas en el USB, ir a Linux, abrir la terminal en esa ubicación y ejecutar el siguiente comando.</p>
@@ -159,7 +189,7 @@ OpenJDK 64-Bit Server VM (build 17.0.4+8, mixed mode)</code></pre>
             <p>Al terminar, ya debería estar instalado Java 11.</p>
 
             <h3>Ngrok</h3>
-            <p>En Linux, para instalar Ngrok, debes ejecutar el siguiente comando en la terminal:</p>
+            <p>En Linux, para instalar Ngrok, debes abrir una nueva terminal y ejecutar el siguiente comando:</p>
             <pre><code>curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
     | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
     && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" \
@@ -179,7 +209,7 @@ do
     java -Xmx4G -Xms4G -jar forge-1.16.5-36.2.34.jar nogui
     echo "El servidor se detuvo. Reiniciando..."
 done</code></pre>
-            <p>Para configurar la RAM, modifica la línea 4, cambiando <code>4G</code> por la cantidad deseada de gigabytes.</p>
+            <p>Para configurar la RAM, modifica la línea 4, cambiando <code>4G</code> por la cantidad deseada de gigabytes en ambos valores.</p>
             <p>Ejemplo:</p>
             <pre><code>echo "Iniciando el ServerITC..."
 while true 
@@ -192,25 +222,29 @@ done</code></pre>
         <li>
             Abre una terminal en la carpeta ServerITC y ejecuta el siguiente comando:
             <pre><code>bash startin_linux.sh</code></pre>
-            <p>Espera a que se inicie el servidor, para verificar si ya termino de iniciar, presiona <code>Enter</code> dos veces y si la terminal no da ninguna respuesta, el server sigue iniciando, en cambio si muestra el siguiente texto, significa que
-                ya inicio el server.</p>
+            <p>Espera a que se inicie el servidor, para verificar si ya termino de iniciar, escribe <code>bsk</code> y presiona <code>Enter</code>. Si la terminal no da ninguna respuesta, el server sigue iniciando, en cambio si muestra el siguiente texto,
+                significa que ya inicio el server.</p>
             <pre><code>Unknown or incomplete command, see below for error at position 1: <--[HERE]</code></pre>
-            <p>El servidor ya está iniciado. Puedes acceder al servidor usando tu IP local:</p>
-            <ul>
-                <li>Abre una terminal y escribe <code>hostname -I</code>. cópia el texto y pegalo como dirección IP del servidor.
-                    <p>El problema es que esta IP solo la podes usar vos.</p>
-                </li>
-            </ul>
-            <p>Para jugadores externos, usa Ngrok:</p>
+            <p>El servidor ya está iniciado. Ahora vamos a abrir Ngrok para poder unirnos</p>
             <p>Abre una terminal en la carpeta ServerITC y ejecuta el siguiente comando:</p>
             <pre><code>ngrok tcp 25565</code></pre>
-            <p>En la tabla que aparece, copia la URL que comienza con <code>tcp://</code> (sin <code>-> localhost:25565</code>) y compártela con los jugadores.</p>
+            <p>Deberia aparecerte una tabla asi:</p>
+            <img src="https://i.imgur.com/XDyxp1M.png" alt="">
+            <p>En la tabla podemos ver 2 columnas, en la columna de la izquierda busca "Forwarding", en esa misma fila, columna derecha, hay una url: <code>tcp://0.tcp.sa.ngrok.io:18781</code> la IP del servidor que debes usar y compartir es <code>0.tcp.sa.ngrok.io:18781</code>                excluyendo el <code>tcp://</code>. Sin embargo el numero que aparece ahi; <code>18781</code>, te va a aparecer diferente a vos, esto es porque por cada vez que se abra el server con Ngrok, ese numero cambia, por eso debes compartir la
+                IP cada vez que abras el server. Por ejemplo si yo abro de nuevo Ngrok, me aparece el siguiente numero:</p>
+            <img src="https://i.imgur.com/ip1bXNV.png" alt="">
+            <p>Podemos ver que esta vez me toco el numero 17634, por lo que la IP que debemos usar para el servidor hasta que lo cerremos y lo abramos de nuevo.</p>
+            <p>Ahora que ya tenemos abierto Ngrok, ya podemos unirnos al servidor. Abrimos Minecraft con Forge 1.16.5 con los mods instalados y vamos a la seccion de Multijugador. Apretamos <code>Agregar servidor</code> y le ponemos un nombre al servidor.
+                Donde dice IP del servidor ponemos la IP que conseguimos en Ngrok.</p>
+            <img src="https://i.imgur.com/u5RrI76.png" alt="" height="500">
+            <p>Apretamos hecho y ya podemos entrar al servidor.</p>
+            <img src="https://i.imgur.com/PfWNgnn.png" alt="">
+
         </li>
     </ol>
 
 
-
-    <script src="script.js"></script>
+    <img src="https://cdn-icons-png.flaticon.com/256/14353/14353791.png" alt="">
 
 </body>
 
